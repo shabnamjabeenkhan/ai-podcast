@@ -8,11 +8,11 @@ import { ReactNode } from 'react';
 export default function DashboardTopNav({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col">
-      <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b px-6">
+      <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b px-6 bg-slate-800">
         <div className="flex-1">
-          <Link href="/" className="text-xl font-semibold">
+          {/* <Link href="/" className="text-xl font-semibold">
             Titan
-          </Link>
+          </Link> */}
         </div>
         <div className="flex justify-center items-center">
           <UserProfile />

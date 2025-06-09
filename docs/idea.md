@@ -8,8 +8,8 @@ Podclip is an AI-powered podcast summarization app. It transforms long-form podc
 2. **Written Summary:** Each summary includes a written breakdown of key topics and main points, exportable to Notion.
 
 ## Business Model (MVP)
-- **Monthly Subscription:** £5.99/month for 10 AI-generated episode summaries.
-- **One-time Payment:** £39.99 for 25 summaries + transcripts.
+- **Monthly Subscription:** £5.99/month for 15 AI-generated episode summaries a month.
+- **One-time Payment:** £29.99 for 45 summaries a month + transcripts.
 
 ## What is NOT in the MVP
 - No sharing or social features

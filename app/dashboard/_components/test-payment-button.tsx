@@ -62,7 +62,7 @@ export default function PaymentButtons() {
 
   return (
     <div className="flex gap-4">
-      <Button
+      <Button variant="outline" className="border-cyan-400 text-cyan-400 font-bold text-lg py-6 rounded-lg hover:bg-cyan-950/30 transition-colors"
         onClick={() => {
           setLoadingType('subscription');
           handlePayment(process.env.NEXT_PUBLIC_STRIPE_PRODUCT_1_PRICE_ID as string, true)
@@ -72,7 +72,7 @@ export default function PaymentButtons() {
       >
         {loadingType === 'subscription' ? 'Processing...' : 'Subscribe for £5.99/month'}
       </Button>
-      <Button
+      <Button className="bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-bold text-lg py-6 rounded-lg shadow-md transition-colors"
         onClick={() => {
           setLoadingType('onetime');
           handlePayment(process.env.NEXT_PUBLIC_STRIPE_ONETIME_PRICE_ID as string, false)
