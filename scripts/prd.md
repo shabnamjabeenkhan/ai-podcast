@@ -11,6 +11,10 @@
 - Ensure a frictionless, private, and cross-device experience
 
 ## Target Users & Roles
+- **Primary Users:**
+  - Podcast listeners
+  - Knowledge workers, students, researchers
+  - Content creators, professionals (journalists, analysts)
 - **Registered Users:**
   - Search and select podcasts/episodes
   - Generate/download 30s audio clips (user-selected or AI-suggested)

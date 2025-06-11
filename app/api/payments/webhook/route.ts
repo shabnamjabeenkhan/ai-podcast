@@ -89,7 +89,7 @@ async function handleSubscriptionEvent(
       console.log(`[STRIPE WEBHOOK] Updating user subscription to null for email: ${customerEmail}`);
       const { error: userError } = await supabase
         .from('user')
-        .update({ subscription: null })
+        .update({ subscription: null, isPaid: false }) // <-- Set isPaid: false on cancel
         .eq('email', customerEmail);
       
       if (userError) {
@@ -99,7 +99,7 @@ async function handleSubscriptionEvent(
           error: 'Error updating user subscription status',
         });
       }
-      console.log(`[STRIPE WEBHOOK] User subscription status updated to null for email: ${customerEmail}`);
+      console.log(`[STRIPE WEBHOOK] User subscription status updated to null and isPaid to false for email: ${customerEmail}`);
     }
   } else {
     console.log(`[STRIPE WEBHOOK] ${type === 'created' ? 'Inserting' : 'Updating'} subscription: ${subscription.id}`);
@@ -110,6 +110,19 @@ async function handleSubscriptionEvent(
       )
       .match({ subscription_id: subscription.id })
       .select());
+
+    // Set isPaid: true for the user
+    if (subscriptionData.user_id) {
+      const { error: paidError } = await supabase
+        .from('user')
+        .update({ isPaid: true })
+        .eq('user_id', subscriptionData.user_id);
+      if (paidError) {
+        console.error(`[STRIPE WEBHOOK] Error updating isPaid for user:`, paidError);
+      } else {
+        console.log(`[STRIPE WEBHOOK] isPaid set to true for user: ${subscriptionData.user_id}`);
+      }
+    }
   }
 
   if (error) {
@@ -254,6 +267,10 @@ async function handleCheckoutSessionCompleted(event: Stripe.Event, supabase: Sup
         console.error(`[STRIPE WEBHOOK] Error fetching user:`, userError);
         throw new Error('Error fetching user');
       }
+      await supabase
+      .from('user')
+      .update({ isPaid: true })
+      .eq('user_id', metadata?.userId);
 
       const paymentData = {
         user_id: metadata?.userId,

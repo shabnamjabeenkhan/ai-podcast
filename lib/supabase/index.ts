@@ -63,3 +63,18 @@ export async function createServerActionClient() {
     }
   );
 }
+
+export async function getUserSubscriptionStatus() {
+  // TODO: Replace with real logic
+  return { isPaid: true }
+}
+
+export async function markUserAsPaid(userId: string) {
+  const supabase = await createServerActionClient();
+  const { error } = await supabase
+    .from("user") // correct table name
+    .update({ isPaid: true })
+    .eq("id", userId);
+
+  if (error) throw new Error(error.message);
+}

@@ -1,50 +1,75 @@
-# Podclip MVP – UI/UX Design (Dashboard)
-
-## Main UI Components
-- **Sidebar/Topbar:** Navigation (Dashboard, Summarize, Account, Contact)
-- **Summarize Panel:**
-  - Upload audio or paste RSS link
-  - Progress indicator (processing/transcribing)
-- **Summary List:**
-  - List of past summaries (audio + written)
-  - Export to Notion button
-  - Usage counter (remaining summaries)
-- **Payment/Upgrade Modal:**
-  - Plan selection (subscription/one-time)
-  - Stripe Checkout integration
-- **Contact Form:**
-  - For podcaster/business inquiries
-
-## User Interactions
-- Drag & drop or select audio file
-- Paste RSS link (auto-parse episodes)
-- Click to play audio summary
-- Click to export written summary to Notion
-- Upgrade flow triggered when limit reached
-- Responsive feedback (loading, errors, success)
-
-## Accessibility
-- All actions keyboard-accessible
-- Sufficient color contrast (WCAG AA)
-- Alt text for icons/images
-- Focus indicators for interactive elements
-- ARIA labels for custom components
-
-## Responsive Design
-- Mobile-first layout (flex/column stacking)
-- Collapsible sidebar/topbar on small screens
-- Touch-friendly buttons and inputs
-- Audio player adapts to screen size
+# UI/UX Design: AI Podcast Summarizer MVP
 
 ---
 
-**Diagram (Textual):**
+## 1. Main App Structure
+- **Header:**
+  - Logo, navigation (Dashboard, Pricing, Account)
+  - Login/Logout button
+- **Main Content:**
+  - Podcast search bar
+  - Podcast/episode list
+  - Episode detail view (audio, summaries, actions)
+- **Footer:**
+  - Minimal, with links to privacy, terms, support
 
-[Sidebar/Topbar]
-  ├── [Summarize Panel]
-  ├── [Summary List]
-  │     └── [Export to Notion]
-  ├── [Payment/Upgrade Modal]
-  └── [Contact Form]
+---
 
-Focus: Fast, distraction-free summarization and export. No social/sharing, no analytics in MVP. 
+## 2. Key UI Components
+- **Podcast Search Bar:**
+  - Prominent at top of dashboard
+  - Autocomplete/search suggestions
+- **Podcast/Episode List:**
+  - Card/list view with podcast artwork, title, and episode count
+  - Click podcast to view episodes
+  - Click episode to view details
+- **Episode Detail View:**
+  - Audio player (with waveform/timeline)
+  - Range picker for selecting 30s segment
+  - "Generate Clip" and "AI Suggest Clip" buttons
+  - Summary display (paragraph, bullet points, segment summary)
+  - Export to Notion and Download buttons
+- **Payment Modal/Page:**
+  - Simple pricing options (subscription, one-time)
+  - Stripe Checkout integration
+- **Notifications:**
+  - Toasts for success/error (clip ready, export complete, etc.)
+
+---
+
+## 3. Main User Interactions & Flows
+- Search for podcasts/episodes
+- Select episode to view details
+- Play episode audio
+- Select or accept suggested segment for 30s clip
+- Generate/download audio clip
+- Generate/view text summary and key takeaways
+- Export summaries to Notion
+- Upgrade via payment modal
+
+---
+
+## 4. Accessibility Considerations
+- Semantic HTML for all interactive elements
+- Keyboard navigation for all controls (search, player, range picker, buttons)
+- Sufficient color contrast for text/buttons
+- ARIA labels for custom components (audio player, range picker)
+- Focus indicators for all actionable elements
+- Test with screen readers
+
+---
+
+## 5. Responsive Design Approach
+- Mobile-first layout using Tailwind CSS
+- Collapsible navigation on mobile
+- Stacked layout for lists and detail views on small screens
+- Audio player and controls adapt to screen size
+- Touch-friendly controls for range picker and buttons
+
+---
+
+## 6. Visual Style
+- Clean, minimal, and modern (inspired by productivity tools)
+- Consistent use of primary/secondary colors and accent
+- Clear, readable typography
+- Subtle hover/focus effects for interactivity 

@@ -1,40 +1,52 @@
-# Podclip MVP – System Architecture (Mermaid.js)
+# System Architecture: AI Podcast Summarizer MVP
 
 ```mermaid
 graph TD
-  A[User Browser]
-  B[Next.js App (Vercel)]
-  C[Supabase DB]
-  D[Supabase Storage]
-  E[OpenAI/Anthropic API]
-  F[ElevenLabs API]
-  G[Clerk Auth]
-  H[Stripe Payments]
-  I[Notion API]
+  User["User (Web/Mobile)"]
+  FE["Next.js Frontend (React, Tailwind, Shadcn UI)"]
+  API["API / Server Actions (Next.js)"]
+  DB["Supabase DB"]
+  Auth["Supabase Auth"]
+  Storage["Supabase Storage (Audio Clips)"]
+  LN["ListenNotes API"]
+  LLM["OpenAI / LLM (Summarization)"]
+  Whisper["Whisper / AssemblyAI (Transcription)"]
+  Stripe["Stripe (Payments)"]
+  Notion["Notion API (Export)"]
 
-  A -- UI/API Calls --> B
-  B -- Auth --> G
-  B -- DB Ops --> C
-  B -- File Upload --> D
-  B -- Summarize/Transcribe --> E
-  B -- Voice Cloning --> F
-  B -- Payments --> H
-  B -- Notion Export --> I
-  C -- Stores Metadata --> B
-  D -- Stores Audio Files --> B
-  H -- Webhooks --> B
+  User -- UI Interactions --> FE
+  FE -- Calls / Data --> API
+  API -- Auth / User Data --> Auth
+  API -- Podcast Search/Meta --> LN
+  API -- DB Reads/Writes --> DB
+  API -- Audio Upload/Download --> Storage
+  API -- Payment Flow --> Stripe
+  API -- Notion Export --> Notion
+  API -- Summarize Text --> LLM
+  API -- Transcribe Audio --> Whisper
+  API -- Returns Data/Results --> FE
+  FE -- Shows Results --> User
 
-  subgraph Infra
-    B
-    C
-    D
+  subgraph External APIs
+    LN
+    LLM
+    Whisper
+    Stripe
+    Notion
+  end
+
+  subgraph Supabase
+    DB
+    Auth
+    Storage
   end
 ```
 
-**Legend:**
-- User interacts with Next.js app (hosted on Vercel)
-- Auth via Clerk
-- Data stored in Supabase (DB + Storage)
-- AI APIs for summarization (OpenAI/Anthropic) and voice (ElevenLabs)
-- Payments via Stripe
-- Notion API for export 
+---
+
+- All user actions flow through the Next.js frontend and server actions.
+- Supabase handles authentication, database, and audio storage.
+- ListenNotes provides podcast search and episode metadata.
+- OpenAI/LLM and Whisper/AssemblyAI handle summarization and transcription.
+- Stripe manages payments (subscription/one-time).
+- Notion API is used for exporting summaries. 
